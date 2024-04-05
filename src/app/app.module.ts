@@ -4,16 +4,39 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { CommonModule, NgForOf } from '@angular/common';
+import { StudentsModule } from './modules/students/students.module';
+import { MainLayoutComponent } from './layout/main-layout/main-layout.component';
+import { DashboardModule } from './modules/dashboard/dashboard.module';
+import { ClassModule } from './modules/class/class.module';
+import { ParentModule } from './modules/parent/parent.module';
+import { CoursesModule } from './modules/courses/courses.module';
+import { FinanceModule } from './modules/finance/finance.module';
+import { ManagmentModule } from './modules/managment/managment.module';
+
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    MainLayoutComponent
   ],
   imports: [
+    CommonModule,
+    StudentsModule,
+    DashboardModule,
+    ClassModule,
+    ParentModule,
+    CoursesModule,
+    FinanceModule,
+    ManagmentModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule,
+    NgForOf,
+    HotToastModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
