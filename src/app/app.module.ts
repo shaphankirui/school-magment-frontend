@@ -16,6 +16,8 @@ import { FinanceModule } from './modules/finance/finance.module';
 import { ManagmentModule } from './modules/managment/managment.module';
 
 
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,8 +38,8 @@ import { ManagmentModule } from './modules/managment/managment.module';
     ReactiveFormsModule,
     HttpClientModule,
     NgForOf,
-    HotToastModule.forRoot()
-  ],
+    // HotToastModule.forRoot()
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

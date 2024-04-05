@@ -103,6 +103,7 @@ export class StudentDetailsComponent implements OnInit, OnChanges {
     console.log('Submitting student form: ', data);
     this.studentService.updateStudent(this.studentId!, this.studentForm.value).subscribe((data: any) => {
       console.log('Student updated', data);
+      this.toast.success('Student updated successfully');
       this.closeModal();
     });
 
