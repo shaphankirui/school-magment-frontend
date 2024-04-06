@@ -17,6 +17,18 @@ export class ClassService {
   const url = `${environment.apiRootUrl}/class`;
   return this.http.get<Class[]>(url);
  }
+ createClass(classData: Class):Observable<Class> {
+  const url = `${environment.apiRootUrl}/class`;
+  return this.http.post<Class>(url, classData);
+ }
+ getClassById(id: number): Observable<Class> {
+  const url = `${environment.apiRootUrl}/class/${id}`
+  return this.http.get<Class>(url);
+}
+
+ updateClass(id:number, data:any): Observable<any> {
+  return this.http.put(`${environment.apiRootUrl}/class/${id}`, data);
+}
 
  
 }

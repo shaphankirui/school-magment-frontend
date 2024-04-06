@@ -73,7 +73,7 @@ export class StudentDetailsComponent implements OnInit, OnChanges {
 
   getStudentById(id: number) {
 
-    console.log("Getting student by id", id);
+    // console.log("Getting student by id", id);
     this.studentService.getStudentById(id).subscribe((data: Student) => {
       this.studentForm.setValue({
         firstName: data.firstName,
@@ -89,7 +89,7 @@ export class StudentDetailsComponent implements OnInit, OnChanges {
 
   onSubmit() {
     if (!this.studentForm.valid) {
-      console.log('Invalid form');
+      this.toast.error('Invalid form please fill all required Fields');
       return;
     }
     const data = {
@@ -108,6 +108,7 @@ export class StudentDetailsComponent implements OnInit, OnChanges {
     });
 
   }
+  
 
   closeModal() {
     this.toggleModal.emit();

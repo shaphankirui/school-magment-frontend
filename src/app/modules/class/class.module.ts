@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { ShowClassComponent } from './components/show-class/show-class.component';
 import { CreateClassComponent } from './components/create-class/create-class.component';
 import { UpdateClassComponent } from './components/update-class/update-class.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -13,7 +15,10 @@ import { UpdateClassComponent } from './components/update-class/update-class.com
     UpdateClassComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    FormsModule,
+    HttpClientModule,
+    ReactiveFormsModule
   ]
 })
 export class ClassModule { }

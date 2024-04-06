@@ -25,6 +25,7 @@ export class StudentListComponent implements OnInit{
     if (id !== null) {
       this.editStudent.emit(id); // Emit event with student ID
     }
+    this.getAllStudents();
   }
 
   constructor(
@@ -40,7 +41,5 @@ export class StudentListComponent implements OnInit{
       console.log('All Students', this.students);
     });
   }
-
-  
 
 }
