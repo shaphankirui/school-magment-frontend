@@ -26,6 +26,7 @@ export class CreateTeacherComponent {
       email: ['', [Validators.required, Validators.email]],
       otherName: [''],
       gender: [null, Validators.required],
+      phone: ['', Validators.required],
       password: ['', Validators.required],
       passwordConfirm: ['', Validators.required]
     }, {
