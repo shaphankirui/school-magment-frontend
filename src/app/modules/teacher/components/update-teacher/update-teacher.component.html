@@ -1,1 +1,275 @@
-<p>update-teacher works!</p>
+<!-- Main modal -->
+<div
+  id="{{ modalId }}"
+  tabindex="-1"
+  aria-hidden="true"
+  class="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto bg-darkGray bg-opacity-75"
+  [ngClass]="{ hidden: !isModalVisible }"
+>
+  <div class="relative p-4 w-full max-w-md max-h-full">
+    <!-- Modal content -->
+    <div class="relative bg-white rounded-lg shadow">
+      <!-- Modal header -->
+      <div
+        class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray"
+      >
+        <h3 class="text-lg font-semibold text-gray-900 dark:text-black">
+          Create New Teacher
+        </h3>
+        <button
+          (click)="closeModal()"
+          type="button"
+          class="text-gray bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray dark:hover:text-white"
+          data-modal-toggle="crud-modal"
+        >
+          <svg
+            class="w-3 h-3"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 14 14"
+          >
+            <path
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
+            />
+          </svg>
+          <span class="sr-only">Close modal</span>
+        </button>
+      </div>
+      <!-- Modal body -->
+      <form [formGroup]="teacherForm" id="createTeacherForm" class="p-4 md:p-5">
+        <div class="grid gap-4 mb-4 grid-cols-2">
+          <div class="col-span-2 sm:col-span-1">
+            <label
+              for="firstName"
+              class="block mb-2 text-sm font-medium text-gray-900 dark:text-black"
+            >
+              First Name
+            </label>
+            <input
+              formControlName="firstName"
+              type="text"
+              id="firstName"
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray dark:border-gray-500 dark:placeholder-white dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+              placeholder="First Name"
+              required
+            />
+            <div
+              *ngIf="
+                teacherForm.get('firstName')?.invalid &&
+                teacherForm.get('firstName')?.touched
+              "
+              class="text-red-500"
+            >
+              <p *ngIf="teacherForm.get('firstName')?.errors?.['required']">
+                First name is required.
+              </p>
+            </div>
+          </div>
+          <!-- Other form controls follow the same pattern -->
+          <div class="col-span-2 sm:col-span-1">
+            <label
+              for="lastName"
+              class="block mb-2 text-sm font-medium text-gray-900 dark:text-black"
+            >
+              Last Name
+            </label>
+            <input
+              formControlName="lastName"
+              type="text"
+              id="lastName"
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray dark:border-gray-500 dark:placeholder-white dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+              placeholder="Last Name"
+              required
+            />
+            <div
+              *ngIf="
+                teacherForm.get('lastName')?.invalid &&
+                teacherForm.get('lastName')?.touched
+              "
+              class="text-red-500"
+            >
+              <p *ngIf="teacherForm.get('lastName')?.errors?.['required']">
+                First name is required.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="grid gap-4 mb-4 grid-cols-2">
+          <div class="col-span-2 sm:col-span-1">
+            <label
+              for="otherName"
+              class="block mb-2 text-sm font-medium text-gray-900 dark:text-black"
+            >
+              Other Name(Optional)
+            </label>
+            <input
+              formControlName="otherName"
+              type="text"
+              id="otherName"
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray dark:border-gray-500 dark:placeholder-white dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+              placeholder="other Name "
+              required
+            />
+           
+          </div>
+          <!-- Other form controls follow the same pattern -->
+          <div class="col-span-2 sm:col-span-1">
+            <label
+              for="email"
+              class="block mb-2 text-sm font-medium text-gray-900 dark:text-black"
+            >
+              Email
+            </label>
+            <input
+              formControlName="email"
+              type="email"
+              id="email"
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray dark:border-gray-500 dark:placeholder-white dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+              placeholder="example@gmail.com"
+              required
+            />
+            <div
+              *ngIf="
+                teacherForm.get('email')?.invalid &&
+                teacherForm.get('email')?.touched
+              "
+              class="text-red-500"
+            >
+              <p *ngIf="teacherForm.get('email')?.errors?.['required']">
+                Email is required.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="grid gap-4 mb-4 grid-cols-2">
+          <div class="col-span-2 sm:col-span-1">
+            <label
+              for="phone"
+              class="block mb-2 text-sm font-medium text-gray-900 dark:text-black"
+            >
+              phone Number
+            </label>
+            <input
+              formControlName="phone"
+              type="text"
+              id="phone"
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray dark:border-gray-500 dark:placeholder-white dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+              placeholder="Phone"
+              required
+            />
+            <div
+              *ngIf="
+                teacherForm.get('phone')?.invalid &&
+                teacherForm.get('phone')?.touched
+              "
+              class="text-red-500"
+            >
+              <p *ngIf="teacherForm.get('phone')?.errors?.['required']">
+                Phone  is required.
+              </p>
+            </div>
+          </div>
+          <!-- Other form controls follow the same pattern -->
+          <div class="col-span-2 sm:col-span-1">
+            <label
+              for="gender"
+              class="block mb-2 text-sm font-medium text-black dark:text-black"
+            >
+              Gender
+            </label>
+            <select
+              formControlName="gender"
+              id="gender"
+              class="bg-gray-50 border border-gray-300 text-white text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray dark:border-gray-500 dark:placeholder-white dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+            >
+              <option [ngValue]="null" disabled selected>Select Gender</option>
+              <option [ngValue]="'Male'">Male</option>
+              <option [ngValue]="'Female'">Female</option>
+            </select>
+          </div>
+        </div>
+        <div class="grid gap-4 mb-4 grid-cols-2">
+          <div class="col-span-2 sm:col-span-1">
+            <label
+              for="password"
+              class="block mb-2 text-sm font-medium text-gray-900 dark:text-black"
+            >
+              password
+            </label>
+            <input
+              formControlName="password"
+              type="password"
+              id="password"
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray dark:border-gray-500 dark:placeholder-white dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+              placeholder="password"
+              required
+            />
+            <div
+              *ngIf="
+                teacherForm.get('password')?.invalid &&
+                teacherForm.get('password')?.touched
+              "
+              class="text-red-500"
+            >
+              <p *ngIf="teacherForm.get('password')?.errors?.['required']">
+                password  is required.
+              </p>
+            </div>
+          </div>
+          <!-- Other form controls follow the same pattern -->
+          <div class="col-span-2 sm:col-span-1">
+            <label
+              for="passwordConfirm"
+              class="block mb-2 text-sm font-medium text-gray-900 dark:text-black"
+            >
+              Confirm password
+            </label>
+            <input
+              formControlName="passwordConfirm"
+              type="password"
+              id="passwordConfirm"
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray dark:border-gray-500 dark:placeholder-white dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+              placeholder="Confirm Password"
+              required
+            />
+            <div
+              *ngIf="
+                teacherForm.get('passwordConfirm')?.invalid &&
+                teacherForm.get('passwordConfirm')?.touched
+              "
+              class="text-red-500"
+            >
+              <p *ngIf="teacherForm.get('passwordConfirm')?.errors?.['required']">
+                password  is required.
+              </p>
+            </div>
+          </div>
+        </div>
+        <button
+          (click)="onSubmit()"
+          type="submit"
+          class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+        >
+          <svg
+            class="me-1 -ms-1 w-5 h-5"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
+              clip-rule="evenodd"
+            ></path>
+          </svg>
+          Add new Teacher
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

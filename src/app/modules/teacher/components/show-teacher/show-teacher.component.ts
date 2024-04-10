@@ -15,7 +15,7 @@ export class ShowTeacherComponent {
   // @Input() modalId: string = '';
   isModalVisible: boolean = false;
   isEditModalVisible: boolean = false;
-  studentIdToEdit: number | null = null;
+  teacherId: number | null = null;
   @Output() editStudent = new EventEmitter<number>(); // Event emitter for edit
 
 
@@ -23,7 +23,7 @@ export class ShowTeacherComponent {
     this.isModalVisible = !this.isModalVisible;
   }
   toggleEditModal(id: number | null) {
-    this.studentIdToEdit = id;
+    this.teacherId = id;
     this.isEditModalVisible = !this.isEditModalVisible;
     if (id !== null) {
       this.editStudent.emit(id); // Emit event with student ID

@@ -160,5 +160,5 @@
 </div>
 
 <app-create-teacher [modalId]="'student-modal'" [isModalVisible]="isModalVisible" (toggleModal)="toggleModal()"></app-create-teacher>
-<!-- <app-update-teacher [modalId]="'student-modal'" [studentId]="studentIdToEdit" [isModalVisible]="isEditModalVisible" (toggleModal)="toggleEditModal(studentIdToEdit)"></app-update-teacher> -->
+<app-update-teacher [modalId]="'student-modal'" [teacherId]="teacherId" [isModalVisible]="isEditModalVisible" (toggleModal)="toggleEditModal(teacherId)"></app-update-teacher>
 

@@ -7,6 +7,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
   selector: 'app-create-teacher',
   templateUrl: './create-teacher.component.html',
   styleUrls: ['./create-teacher.component.scss']
+  
 })
 export class CreateTeacherComponent {
   @Input() modalId: string = '';
@@ -51,7 +52,8 @@ export class CreateTeacherComponent {
 
   onSubmit() {
     if (this.teacherForm.invalid) {
-      // Form is invalid, handle validation errors
+      this.toast.error('Please fill in all fields');
+      console.log("Form is invalid", this.teacherForm.value);
       return;
     }
 
