@@ -10,6 +10,7 @@ import { ShowFinanceComponent } from './modules/finance/components/show-finance/
 import { ShowManagmentComponent } from './modules/managment/components/show-managment/show-managment.component';
 import { ShowParentsComponent } from './modules/parent/components/show-parents/show-parents.component';
 import { ShowTeacherComponent } from './modules/teacher/components/show-teacher/show-teacher.component';
+import { TeacherLoginComponent } from './modules/auth/components/teacher-login/teacher-login.component';
 
 const routes: Routes = [
   { path: 'students', component: StudentListComponent },
@@ -22,6 +23,7 @@ const routes: Routes = [
   { path: 'managment', component: ShowManagmentComponent },
   { path: 'parents', component: ShowParentsComponent },
   { path: 'staff', component: ShowTeacherComponent },
+  { path: 'teacher-login', component: TeacherLoginComponent },
 ];
 
 @NgModule({

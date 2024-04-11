@@ -16,6 +16,7 @@ import { FinanceModule } from './modules/finance/finance.module';
 import { ManagmentModule } from './modules/managment/managment.module';
 import { TeacherModule } from './modules/teacher/teacher.module';
 import { ExamsModule } from './modules/exams/exams.module';
+import { AuthModule } from './modules/auth/auth.module';
 
 
 
@@ -38,6 +39,7 @@ import { ExamsModule } from './modules/exams/exams.module';
     ManagmentModule,
     TeacherModule,
     ExamsModule,
+    // AuthModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,

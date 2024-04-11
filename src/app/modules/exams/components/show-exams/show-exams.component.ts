@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
+import { ExamsService } from '../../../../shared/services/exams.service';
+import { Exams } from '../../../../shared/interfaces/exams.interface';
+import { Class } from '../../../../shared/interfaces/class.interface';
 
 @Component({
   selector: 'app-show-exams',
@@ -6,16 +9,16 @@ import { Component } from '@angular/core';
   styleUrl: './show-exams.component.scss'
 })
 export class ShowExamsComponent {
-  classes: Class[] = [];
+  exams: Exams [] = [];
   constructor(
-      private classService: ClassService
+      private examsService: ExamsService
   ) { }
   ngOnInit(): void {
-    this.getAllClasses();
+    this.getAllExams();
   }
   isModalVisible: boolean = false;
   isEditModalVisible: boolean = false;
-  classId: number | null = null;
+  examId: number | null = null;
   @Output() editStudent = new EventEmitter<number>(); // Event emitter for edit
 
 
@@ -23,18 +26,18 @@ export class ShowExamsComponent {
     this.isModalVisible = !this.isModalVisible;
   }
   toggleEditModal(id: number | null) {
-    this.classId = id;
+    this.examId = id;
     this.isEditModalVisible = !this.isEditModalVisible;
     if (id !== null) {
       this.editStudent.emit(id); // Emit event with student ID
     }
-    this.getAllClasses();
+    this.getAllExams();
   }
 
-  getAllClasses() {
-    this.classService.getAllClasses().subscribe((data: Class[]) => {
-      this.classes = data;
-      console.log('All classes', this.classes);
+  getAllExams() {
+    this.examsService.getAllExams().subscribe((data: Exams[]) => {
+      this.exams = data;
+      console.log('All classes', this.exams);
     })
   }
  

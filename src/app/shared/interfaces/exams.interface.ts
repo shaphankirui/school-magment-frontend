@@ -1,8 +1,9 @@
-export interface Class {
+export interface Exams {
     id: number;
     name: string;
-    classTeacher: string;
-    classPrefect: string;
-    academicTermId: number; 
+    class: string;
+    course: string;
+    academicTermId: number;
+    out_of: number;
   }
   
