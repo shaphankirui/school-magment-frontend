@@ -19,6 +19,7 @@ import { TeacherModule } from './modules/teacher/teacher.module';
 
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,6 +27,7 @@ import { TeacherModule } from './modules/teacher/teacher.module';
   ],
   imports: [
     CommonModule,
+    BrowserModule,
     StudentsModule,
     DashboardModule,
     ClassModule,
@@ -40,6 +42,7 @@ import { TeacherModule } from './modules/teacher/teacher.module';
     ReactiveFormsModule,
     HttpClientModule,
     NgForOf,
+    
     // HotToastModule.forRoot()
     ],
   providers: [],
