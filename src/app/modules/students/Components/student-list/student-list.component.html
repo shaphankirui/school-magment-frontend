@@ -88,6 +88,9 @@
                     Class
                 </th>
                 <th scope="col" class="px-6 py-3">
+                    Parent
+                </th>
+                <th scope="col" class="px-6 py-3">
                     Fee Balance
                 </th>
                 <th scope="col" class="px-6 py-3">
@@ -116,7 +119,10 @@
                     {{student.gender}}
                 </td>
                 <td class="px-6 py-4">
-                    {{student.classId}}
+                    {{getClassNameById(student.classId)}}
+                </td>
+                <td class="px-6 py-4">
+                    {{getParentNameById(student.parentId)}}
                 </td>
                 <td class="px-6 py-4">
                     $2999

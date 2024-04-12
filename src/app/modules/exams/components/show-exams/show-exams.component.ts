@@ -29,10 +29,8 @@ export class ShowExamsComponent {
   ) { }
   ngOnInit(): void {
     this.getAllExams();
-    this.getClassNameById(1);
-    this.getTeacherNameById(1);
-    this.getCourseNameById(1);
-    this.getAcademicTermNameById(1);
+    this.getAllData();
+ 
   }
   isModalVisible: boolean = false;
   isEditModalVisible: boolean = false;
@@ -51,6 +49,25 @@ export class ShowExamsComponent {
     }
     this.getAllExams();
   }
+  getAllData() {
+   
+
+    this.classService.getAllClasses().subscribe((classes: Class[]) => {
+      this.classes = classes;
+    });
+
+    this.courseService.getAllCourse().subscribe((courses: Course[]) => {
+      this.courses = courses;
+    });
+
+    this.teacherService.getAllTeacher().subscribe((teachers: Teacher[]) => {
+      this.teachers = teachers;
+    });
+
+    this.courseService.getAllAccadicTerm().subscribe((academicTerms: any[]) => {
+      this.AccdemicTerms = academicTerms;
+    });
+  }
 
   getAllExams() {
     this.examsService.getAllExams().subscribe((data: Exams[]) => {
@@ -58,30 +75,42 @@ export class ShowExamsComponent {
       console.log('All classes', this.exams);
     })
   }
-  getTeacherNameById(teacherId: number){
-    this.teacherService.getTeacherById(teacherId).subscribe((data: Teacher) => {
-      console.log(data);
-      return data.firstName +'' + data.lastName;
-    })
+  getTeacherNameById(teacherId: number): string {
+    const teacher = this.teachers.find((teacher: Teacher) => teacher.id === teacherId);
+    if (teacher) {
+        return teacher.firstName + ' ' + teacher.lastName;
+    } else {
+        return 'Unknown Teacher'; // Or any default value you prefer
+    }
 }
-getCourseNameById(courseId: number){
-    this.courseService.getCourseById(courseId).subscribe((data: Course) => {
-      console.log(data);
-      return data.name ;
-    })
+
+getCourseNameById(courseId: number): string {
+  const course = this.courses.find((course: Course) => course.id === courseId);
+  if (course) {
+      return course.name;
+  } else {
+      return 'Unknown Course'; // Or any default value you prefer
+  }
 }
-getClassNameById(classId: number){
-    this.classService.getClassById(classId).subscribe((data: Class) => {
-      console.log(data);
-      return data.name ;
-    })
+
+getClassNameById(classId: number): string {
+  const classItem = this.classes.find((classItem: Class) => classItem.id === classId);
+  if (classItem) {
+      return classItem.name;
+  } else {
+      return 'Unknown Class'; // Or any default value you prefer
+  }
 }
-getAcademicTermNameById(teacherId: number){
-    this.courseService.getTearmyId(teacherId).subscribe((data: any) => {
-      console.log(data);
-      return data.name;
-    })
+
+getAcademicTermNameById(teacherId: number): string {
+  const academicTerm = this.AccdemicTerms.find((term: any) => term.teacherId === teacherId);
+  if (academicTerm) {
+      return academicTerm.name;
+  } else {
+      return 'Unknown Academic Term'; // Or any default value you prefer
+  }
 }
+
 
  
 }
