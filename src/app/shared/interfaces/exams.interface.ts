@@ -1,9 +1,12 @@
 export interface Exams {
     id: number;
     name: string;
-    class: string;
-    course: string;
+    classId: number;
+    courseId: number;
+    teacherId: number;
     academicTermId: number;
-    out_of: number;
+    date: string;
+    outOf: number;
+    passMark: number;
   }
   

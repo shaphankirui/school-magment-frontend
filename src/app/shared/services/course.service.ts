@@ -16,6 +16,10 @@ export class CourseService {
   const url = `${environment.apiRootUrl}/courses`;
   return this.http.get<Course[]>(url);
  }
+ getAllAccadicTerm():Observable<any[]> {
+  const url = `${environment.apiRootUrl}/academic-terms`;
+  return this.http.get<any[]>(url);
+ }
  createCourse(courseData: Course):Observable<Course> {
   const url = `${environment.apiRootUrl}/courses`;
   return this.http.post<Course>(url, courseData);
@@ -23,6 +27,10 @@ export class CourseService {
  getCourseById(id: number): Observable<Course> {
   const url = `${environment.apiRootUrl}/courses/${id}`
   return this.http.get<Course>(url);
+}
+ getTearmyId(id: number): Observable<any> {
+  const url = `${environment.apiRootUrl}/academic-terms/${id}`
+  return this.http.get<any>(url);
 }
 
  updateCourse(id:number, data:any): Observable<any> {

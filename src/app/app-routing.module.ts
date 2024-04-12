@@ -11,6 +11,7 @@ import { ShowManagmentComponent } from './modules/managment/components/show-mana
 import { ShowParentsComponent } from './modules/parent/components/show-parents/show-parents.component';
 import { ShowTeacherComponent } from './modules/teacher/components/show-teacher/show-teacher.component';
 import { TeacherLoginComponent } from './modules/auth/components/teacher-login/teacher-login.component';
+import { ShowExamsComponent } from './modules/exams/components/show-exams/show-exams.component';
 
 const routes: Routes = [
   { path: 'students', component: StudentListComponent },
@@ -23,6 +24,7 @@ const routes: Routes = [
   { path: 'managment', component: ShowManagmentComponent },
   { path: 'parents', component: ShowParentsComponent },
   { path: 'staff', component: ShowTeacherComponent },
+  { path: 'exams', component: ShowExamsComponent },
   { path: 'teacher-login', component: TeacherLoginComponent },
 ];
 

@@ -1,1 +1,263 @@
-<p>create-exams works!</p>
+<!-- Main modal -->
+<div
+  id="{{ modalId }}"
+  tabindex="-1"
+  aria-hidden="true"
+  class="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto bg-darkGray bg-opacity-75"
+  [ngClass]="{ hidden: !isModalVisible }"
+>
+  <div class="relative p-4 w-full max-w-md max-h-full">
+    <!-- Modal content -->
+    <div class="relative bg-white rounded-lg shadow">
+      <!-- Modal header -->
+      <div
+        class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray"
+      >
+        <h3 class="text-lg font-semibold text-gray-900 dark:text-black">
+          Create New Exam
+        </h3>
+        <button
+          (click)="closeModal()"
+          type="button"
+          class="text-gray bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray dark:hover:text-white"
+          data-modal-toggle="crud-modal"
+        >
+          <svg
+            class="w-3 h-3"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 14 14"
+          >
+            <path
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
+            />
+          </svg>
+          <span class="sr-only">Close modal</span>
+        </button>
+      </div>
+      <!-- Modal body -->
+      <form [formGroup]="examForm" id="createExamForm" class="p-4 md:p-5">
+        <div class="grid gap-4 mb-4 grid-cols-2">
+          <div class="col-span-2">
+            <label
+              for="name"
+              class="block mb-2 text-sm font-medium text-gray-900 dark:text-black"
+            >
+              Exam Name
+            </label>
+            <input
+              formControlName="name"
+              type="text"
+              id="name"
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray dark:border-gray-500 dark:placeholder-white dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+              placeholder="Exam Name"
+              required
+            />
+            <div
+              *ngIf="
+                examForm.get('name')?.invalid &&
+                examForm.get('name')?.touched
+              "
+              class="text-red-500"
+            >
+              <p *ngIf="examForm.get('name')?.errors?.['required']">
+                Exam name is required.
+              </p>
+            </div>
+          </div>
+          <!-- Other form controls follow the same pattern -->
+          <div class="col-span-2">
+            <label
+              for="date"
+              class="block mb-2 text-sm font-medium text-gray-900 dark:text-black"
+            >
+              Exam Date
+            </label>
+            <input
+              formControlName="date"
+              type="date"
+              id="date"
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray dark:border-gray-500 dark:placeholder-white dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+              required
+            />
+            <div
+              *ngIf="
+                examForm.get('date')?.invalid &&
+                examForm.get('date')?.touched
+              "
+              class="text-red-500"
+            >
+              <p *ngIf="examForm.get('date')?.errors?.['required']">
+                Exam date is required.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="grid gap-4 mb-4 grid-cols-2">
+            <div class="col-span-2">
+                <label
+                  for="courseId"
+                  class="block mb-2 text-sm font-medium text-gray-900 dark:text-black"
+                >
+                  Course
+                </label>
+                <select formControlName="courseId" id="courseId" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray dark:border-gray-500 dark:placeholder-white dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" required>
+                  <option *ngFor="let course of courses" [value]="course.id">{{ course.name }}</option>
+                </select>
+                <div
+                  *ngIf="examForm.get('courseId')?.invalid && examForm.get('courseId')?.touched"
+                  class="text-red-500"
+                >
+                  <p *ngIf="examForm.get('courseId')?.errors?.['required']">
+                    Course is required.
+                  </p>
+                </div>
+              </div>
+              
+          <!-- Other form controls follow the same pattern -->
+          <div class="col-span-2">
+            <label
+              for="classId"
+              class="block mb-2 text-sm font-medium text-gray-900 dark:text-black"
+            >
+              Class
+            </label>
+            <select formControlName="classId" id="classId" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray dark:border-gray-500 dark:placeholder-white dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" required>
+              <option value="" disabled selected>Select class</option>
+              <option *ngFor="let class of classes" [value]="class.id">{{ class.name }}</option>
+            </select>
+            <div
+              *ngIf="examForm.get('classId')?.invalid && examForm.get('classId')?.touched"
+              class="text-red-500"
+            >
+              <p *ngIf="examForm.get('classId')?.errors?.['required']">
+                Class is required.
+              </p>
+            </div>
+          </div>
+          
+          <div class="col-span-2">
+            <label
+              for="teacherId"
+              class="block mb-2 text-sm font-medium text-gray-900 dark:text-black"
+            >
+              Teacher
+            </label>
+            <select formControlName="teacherId" id="teacherId" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray dark:border-gray-500 dark:placeholder-white dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" required>
+              <option value="" disabled selected>Select teacher</option>
+              <option *ngFor="let teacher of teachers" [value]="teacher.id">{{ teacher.firstName + ' ' + teacher.lastName }}</option>
+            </select>
+            <div
+              *ngIf="examForm.get('teacherId')?.invalid && examForm.get('teacherId')?.touched"
+              class="text-red-500"
+            >
+              <p *ngIf="examForm.get('teacherId')?.errors?.['required']">
+                Teacher is required.
+              </p>
+            </div>
+          </div>
+          
+          <div class="col-span-2">
+            <label
+              for="accademicTermId"
+              class="block mb-2 text-sm font-medium text-gray-900 dark:text-black"
+            >
+              Academic Term
+            </label>
+            <select formControlName="accademicTermId" id="accademicTermId" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray dark:border-gray-500 dark:placeholder-white dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" required>
+              <option value="" disabled selected>Select academic term</option>
+              <option *ngFor="let term of AccdemicTerms" [value]="term.id">{{ term.name }}</option>
+            </select>
+            <div
+              *ngIf="examForm.get('accademicTermId')?.invalid && examForm.get('accademicTermId')?.touched"
+              class="text-red-500"
+            >
+              <p *ngIf="examForm.get('accademicTermId')?.errors?.['required']">
+                Academic term is required.
+              </p>
+            </div>
+          </div>
+          
+          <div class="col-span-2">
+            <label
+              for="outOf"
+              class="block mb-2 text-sm font-medium text-gray-900 dark:text-black"
+            >
+              OUT OF
+            </label>
+            <input
+              formControlName="out_of"
+              type="number"
+              id="out_of"
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray dark:border-gray-500 dark:placeholder-white dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+              placeholder="Out Of"
+              required
+            />
+            <div
+              *ngIf="
+                examForm.get('out_of')?.invalid &&
+                examForm.get('out_of')?.touched
+              "
+              class="text-red-500"
+            >
+              <p *ngIf="examForm.get('out_of')?.errors?.['required']">
+                Out Of is required.
+              </p>
+            </div>
+          </div>
+          <div class="col-span-2">
+            <label
+              for="outOf"
+              class="block mb-2 text-sm font-medium text-gray-900 dark:text-black"
+            >
+              Pass Mark 
+            </label>
+            <input
+              formControlName="passMark"
+              type="number"
+              id="passMark"
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray dark:border-gray-500 dark:placeholder-white dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+              placeholder="Pass Mark"
+              required
+            />
+            <div
+              *ngIf="
+                examForm.get('passMark')?.invalid &&
+                examForm.get('passMark')?.touched
+              "
+              class="text-red-500"
+            >
+              <p *ngIf="examForm.get('passMark')?.errors?.['required']">
+                Pass Mark  is required.
+              </p>
+            </div>
+          </div>
+        </div>
+        <button
+          (click)="onSubmit()"
+          type="submit"
+          class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+        >
+          <svg
+            class="me-1 -ms-1 w-5 h-5"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
+              clip-rule="evenodd"
+            ></path>
+          </svg>
+          Add new Exam
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
