@@ -1,4 +1,5 @@
 export interface Student {
+score: any;
     id: number;
     firstName: string;
     lastName: string;

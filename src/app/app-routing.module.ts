@@ -12,6 +12,8 @@ import { ShowParentsComponent } from './modules/parent/components/show-parents/s
 import { ShowTeacherComponent } from './modules/teacher/components/show-teacher/show-teacher.component';
 import { TeacherLoginComponent } from './modules/auth/components/teacher-login/teacher-login.component';
 import { ShowExamsComponent } from './modules/exams/components/show-exams/show-exams.component';
+import { AddResultsComponent } from './modules/results/components/add-results/add-results.component';
+import { ShowResultsComponent } from './modules/results/components/show-results/show-results.component';
 
 const routes: Routes = [
   { path: 'students', component: StudentListComponent },
@@ -26,6 +28,8 @@ const routes: Routes = [
   { path: 'staff', component: ShowTeacherComponent },
   { path: 'exams', component: ShowExamsComponent },
   { path: 'teacher-login', component: TeacherLoginComponent },
+  { path: 'Add_results', component: AddResultsComponent },
+  { path: 'results', component: ShowResultsComponent },
 ];
 
 @NgModule({

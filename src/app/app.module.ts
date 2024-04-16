@@ -17,6 +17,7 @@ import { ManagmentModule } from './modules/managment/managment.module';
 import { TeacherModule } from './modules/teacher/teacher.module';
 import { ExamsModule } from './modules/exams/exams.module';
 import { AuthModule } from './modules/auth/auth.module';
+import { ResultsModule } from './modules/results/results.module';
 
 
 
@@ -39,7 +40,7 @@ import { AuthModule } from './modules/auth/auth.module';
     ManagmentModule,
     TeacherModule,
     ExamsModule,
-    // AuthModule,
+    ResultsModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,
