@@ -18,15 +18,13 @@ import { TeacherModule } from './modules/teacher/teacher.module';
 import { ExamsModule } from './modules/exams/exams.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { ResultsModule } from './modules/results/results.module';
-
-
-
-
+import { AuthLayoutComponent } from './layout/auth-layout/auth-layout.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    MainLayoutComponent
+    // MainLayoutComponent,
+    // AuthLayoutComponent
   ],
   imports: [
     CommonModule,
@@ -47,10 +45,10 @@ import { ResultsModule } from './modules/results/results.module';
     ReactiveFormsModule,
     HttpClientModule,
     NgForOf,
-    
+
     // HotToastModule.forRoot()
-    ],
+  ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

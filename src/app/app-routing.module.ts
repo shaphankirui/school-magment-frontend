@@ -14,26 +14,41 @@ import { TeacherLoginComponent } from './modules/auth/components/teacher-login/t
 import { ShowExamsComponent } from './modules/exams/components/show-exams/show-exams.component';
 import { AddResultsComponent } from './modules/results/components/add-results/add-results.component';
 import { ShowResultsComponent } from './modules/results/components/show-results/show-results.component';
+import { AuthLayoutComponent } from './layout/auth-layout/auth-layout.component';
+import { MainLayoutComponent } from './layout/main-layout/main-layout.component';
 
 const routes: Routes = [
-  { path: 'students', component: StudentListComponent },
-  { path: 'add_student', component: StudentCreateComponent },
-  { path: 'student:id', component: StudentDetailsComponent },
-  { path: 'dashboard', component: DashboardMainComponent },
-  { path: 'class', component: ShowClassComponent },
-  { path: 'courses', component: ShowCoursesComponent },
-  { path: 'finance', component: ShowFinanceComponent },
-  { path: 'managment', component: ShowManagmentComponent },
-  { path: 'parents', component: ShowParentsComponent },
-  { path: 'staff', component: ShowTeacherComponent },
-  { path: 'exams', component: ShowExamsComponent },
-  { path: 'teacher-login', component: TeacherLoginComponent },
-  { path: 'postResults', component: AddResultsComponent },
-  { path: 'results', component: ShowResultsComponent },
+  {
+    path: '',
+    component: MainLayoutComponent,
+    // canActivate: [AuthGuard],
+    children: [
+      { path: 'students', component: StudentListComponent },
+      { path: 'add_student', component: StudentCreateComponent },
+      { path: 'student:id', component: StudentDetailsComponent },
+      { path: 'dashboard', component: DashboardMainComponent },
+      { path: 'class', component: ShowClassComponent },
+      { path: 'courses', component: ShowCoursesComponent },
+      { path: 'finance', component: ShowFinanceComponent },
+      { path: 'managment', component: ShowManagmentComponent },
+      { path: 'parents', component: ShowParentsComponent },
+      { path: 'staff', component: ShowTeacherComponent },
+      { path: 'exams', component: ShowExamsComponent },
+      { path: 'postResults', component: AddResultsComponent },
+      { path: 'results', component: ShowResultsComponent },
+    ],
+  },
+
+  {
+    path: '',
+    component: AuthLayoutComponent,
+    // canActivate: [LoginGuard],
+    children: [{ path: 'login', component: TeacherLoginComponent }],
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
