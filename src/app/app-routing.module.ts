@@ -28,7 +28,7 @@ const routes: Routes = [
   { path: 'staff', component: ShowTeacherComponent },
   { path: 'exams', component: ShowExamsComponent },
   { path: 'teacher-login', component: TeacherLoginComponent },
-  { path: 'Add_results', component: AddResultsComponent },
+  { path: 'postResults', component: AddResultsComponent },
   { path: 'results', component: ShowResultsComponent },
 ];
 

@@ -12,26 +12,45 @@
       </div>
     </div>
   
-    <!-- Dropdown for selecting exams -->
-    <div class="flex items-center space-x-2 mb-2">
-      <select [(ngModel)]="selectedExamId" (change)="getTheExamsResults(selectedExamId!)" class="bg-gray-700 text-white px-4 py-2 rounded-md">
-        <option *ngFor="let exam of exams" [value]="exam.id">{{ exam.name }}</option>
-      </select>
-    </div>
+<div class="flex flex-row gap-2">
+      <!-- Dropdown for selecting exams -->
+      <div class="flex items-center  space-x-2 mb-2">
+        <div class="flex flex-col">
+          <h1 class="text-center text-white">Select Class</h1>
+        <select [(ngModel)]="selectedClassId" (change)="getTheClassExam(selectedClassId!)" class="bg-gray-700 text-white px-4 py-2 rounded-md">
+          <option *ngFor="let class of classes" [value]="class.id">{{ class.name }}</option>
+        </select>
+        </div>
+      </div>
+      <div class="flex items-center  space-x-2 mb-2">
+        <div class="flex flex-col">
+          <h1 class="text-center text-white">Select Exam</h1>
+        <select [(ngModel)]="selectedExamId" (change)="getTheExamsResults(selectedExamId!)" class="bg-gray-700 text-white px-4 py-2 rounded-md">
+          <option *ngFor="let exam of exams" [value]="exam.id">{{ exam.name }}</option>
+        </select>
+        </div>
+      </div>
+</div>
   
     <!-- Results Table -->
     <table class="w-full text-left text-gray-300">
       <thead class="bg-gray-700">
         <tr>
-          <th class="px-4 py-2">Student ID</th>
+          <th class="px-4 py-2">Student Name</th>
+          <th class="px-4 py-2">Exam</th>
+          <th class="px-4 py-2">Class</th>
           <th class="px-4 py-2">Score</th>
+          <th class="px-4 py-2">Percentage</th>
           <!-- Add more table headers as needed -->
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let result of examResults" class="hover:bg-gray-700">
-          <td class="px-4 py-2">{{ result.studentId }}</td>
+          <td class="px-4 py-2">{{ getStudentNameById(result.studentId )}}</td>
+          <td class="px-4 py-2">{{ getExamNameById(result.examId )}}</td>
+          <td class="px-4 py-2">{{ getClassNameById(result.examId )}}</td>
           <td class="px-4 py-2">{{ result.score }}</td>
+          <td class="px-4 py-2">{{ calculatePercentage(result.score,result.examId)}}%</td>
           <!-- Add more table cells as needed -->
         </tr>
       </tbody>

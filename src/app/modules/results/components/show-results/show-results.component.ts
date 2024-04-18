@@ -5,6 +5,10 @@ import { ExamsService } from '../../../../shared/services/exams.service';
 import { ResultsService } from '../../../../shared/services/results.service';
 import { Exams } from '../../../../shared/interfaces/exams.interface';
 import { Result } from '../../../../shared/interfaces/reuslts.interface';
+import { Student } from '../../../../shared/interfaces/student.interface';
+import { StudentService } from '../../../../shared/services/student.service';
+import { Class } from '../../../../shared/interfaces/class.interface';
+import { ClassService } from '../../../../shared/services/class.service';
 
 @Component({
   selector: 'app-show-results',
@@ -14,15 +18,23 @@ import { Result } from '../../../../shared/interfaces/reuslts.interface';
 export class ShowResultsComponent implements OnInit {
   exams: Exams[] = [];
   selectedExamId: number| null=null;
+  selectedClassId: number| null=null;
   examResults: Result[] = [];
+  students: Student[] = [];
+  classes: Class[] = [];
 
   constructor(
     private examService: ExamsService,
-    private resultsService: ResultsService
+    private resultsService: ResultsService,
+    private studentsService:StudentService,
+    private classService: ClassService
+
   ) { }
 
   ngOnInit() {
     this.getExams();
+    this.getAllStudents();
+    this.getAllClasses();
   }
 
   getExams() {
@@ -34,10 +46,74 @@ export class ShowResultsComponent implements OnInit {
       }
     });
   }
+  getAllStudents() {
+    this.studentsService.getAllStudents().subscribe(students => {
+      this.students = students;
+    });
+  }
+  getAllClasses() {
+    this.classService.getAllClasses().subscribe(classes => {
+      this.classes = classes;
+    });
+  }
+  getStudentNameById(studentId: number): string {
+    const studentName = this.students.find((classItem: Student) => classItem.id === studentId);
+    if (studentName) {
+        return studentName.firstName +' ' + studentName.lastName;
+    } else {
+        return 'Unknown Student'; // Or any default value you prefer
+    }
+  }
+  getExamNameById(examId: number): string {
+    const studentName = this.exams.find((examItem: Exams) => examItem.id === examId);
+    if (studentName) {
+        return studentName.name;
+    } else {
+        return 'Unknown Student'; // Or any default value you prefer
+    }
+  }
+  getClassNameById(examId: number): string {
+    const examItem = this.exams.find((examItem: Exams) => examItem.id === examId);
+    if (examItem) {
+      const classItem = this.classes.find((classItem: Class) => classItem.id === examItem.classId);
+    if (classItem) {
+      return classItem.name;
+    } else {
+        return 'Unknown Class'; // Or any default value you prefer
+    }
+    } else {
+        return 'Unknown Class'; // Or any default value you prefer
+    }
+  }
+
+  calculatePercentage(score: number,examId:number): any {
+    const exam = this.exams.find((examItem: Exams) => examItem.id === examId);
+    if (exam) {
+      const percentage = (score / exam.outOf) * 100;
+      const roundedPercentage = Math.round(percentage); // Round off to nearest whole number
+      return roundedPercentage;        
+    } else {
+        return 'Calculating...'; // Or any default value you prefer
+    }
+
+  }
 
   getTheExamsResults(examId: number) {
     this.resultsService.getStudentsAllResultForAnExam(examId).subscribe((data: Result[]) => {
       this.examResults = data;
     });
   }
+  getTheClassExam(classId: number) {
+    console.log('passed class Id', classId);
+    
+    // Convert classId to number if it's a string
+    const classIdNumber = typeof classId === 'string' ? parseInt(classId) : classId;
+
+    this.examService.getAllExams().subscribe((data: Exams[]) => {
+        this.exams = data.filter((exam: Exams) => exam.classId === classIdNumber);
+        this.examResults=[];
+    });
+}
+
+
 }
