@@ -1,28 +1,54 @@
-<!-- add-results.component.html -->
-
 <div class="container mx-auto py-6">
-    <h1 class="text-2xl font-bold mb-4">Add Exam Results</h1>
-  
-    <!-- Exam Selection Dropdown -->
-    <div class="mb-4">
-      <label for="exam" class="block text-sm font-medium text-gray-700">Select Exam:</label>
-      <select id="exam" [(ngModel)]="examId" (ngModelChange)="onExamChange()" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-        <option *ngFor="let exam of exams" [value]="exam.id">{{ exam.name }}</option>
-      </select>
-    </div>
-  
-    <!-- Students List -->
-    <div *ngIf="students.length > 0">
-      <h2 class="text-lg font-semibold mb-2">Students Taking the Exam</h2>
-      <ul>
-        <li *ngFor="let student of students" class="flex items-center justify-between py-2 border-b border-gray-300">
-          <span>{{ student.firstName }} {{ student.lastName }}</span>
-          <!-- Input field for entering student's score -->
-          <input type="number" [(ngModel)]="student.score" placeholder="Enter score" class="ml-4 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-        </li>
-      </ul>
-    </div>
-  
-    <!-- Button to submit results -->
-    <button (click)="submitResults()" class="mt-4 px-4 py-2 bg-blue-500 text-white rounded-md shadow-sm hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">Submit Results</button>
+  <h1 class="text-2xl font-bold mb-4">Add Exam Results</h1>
+
+  <!-- Filter by Class -->
+  <div class="mb-4">
+    <label for="class" class="block text-sm font-medium text-gray-700">Select Class:</label>
+    <select
+      id="class"
+      [(ngModel)]="selectedClassId"
+      (ngModelChange)="onClassChange()"
+      class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+    >
+      <option *ngFor="let class of classes" [value]="class.id">{{ class.name }}</option>
+    </select>
   </div>
+
+  <!-- Exam Selection Dropdown -->
+  <div class="mb-4">
+    <label for="exam" class="block text-sm font-medium text-gray-700">Select Exam:</label>
+    <select
+      id="exam"
+      [(ngModel)]="examId"
+      (ngModelChange)="onExamChange()"
+      class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+    >
+      <option *ngFor="let exam of exams" [value]="exam.id">{{ exam.name }}</option>
+    </select>
+  </div>
+
+  <!-- Students List -->
+  <div *ngIf="students.length > 0">
+    <h2 class="text-lg font-semibold mb-2">Students Taking the Exam</h2>
+    <ul>
+      <li *ngFor="let student of students" class="flex items-center justify-between py-2 border-b border-gray-300">
+        <span>{{ student.firstName }} {{ student.lastName }}</span>
+        <!-- Input field for entering student's score -->
+        <input
+          type="number"
+          [(ngModel)]="student.score"
+          placeholder="Enter score"
+          class="ml-4 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+        />
+      </li>
+    </ul>
+  </div>
+
+  <!-- Button to submit results -->
+  <button
+    (click)="submitResults()"
+    class="mt-4 px-4 py-2 bg-blue-500 text-white rounded-md shadow-sm hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+  >
+    Submit Results
+  </button>
+</div>

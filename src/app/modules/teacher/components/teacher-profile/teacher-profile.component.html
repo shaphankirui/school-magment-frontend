@@ -4,6 +4,7 @@
     <!-- Buttons -->
     <div class="flex items-center space-x-4">
       <button
+        routerLink="/postResults"
         class="flex items-center bg-blue-500 text-white font-semibold py-2 px-4 rounded hover:bg-blue-600"
       >
         <svg
@@ -21,6 +22,26 @@
           ></path>
         </svg>
         Post Results
+      </button>
+      <button
+        routerLink="/results"
+        class="flex items-center bg-blue-500 text-white font-semibold py-2 px-4 rounded hover:bg-blue-600"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-6 w-6 mr-1"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+          ></path>
+        </svg>
+        See Results
       </button>
       <button
         class="flex items-center bg-blue-500 text-white font-semibold py-2 px-4 rounded hover:bg-blue-600"
@@ -69,7 +90,9 @@
         alt="Teacher Profile Picture"
       />
       <div>
-        <h2 class="text-lg font-semibold">Teacher Name</h2>
+        <h2 class="text-lg font-semibold">
+          {{ teacher.firstName + " " + teacher.lastName }}
+        </h2>
         <p class="text-sm text-gray-600">Subject Area</p>
       </div>
     </div>

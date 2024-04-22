@@ -1,0 +1,76 @@
+<div class="container mx-auto py-6">
+  <h1 class="text-2xl font-bold mb-4">Assign Teacher to Course</h1>
+
+  <!-- Teacher Selection Dropdown -->
+  <div class="mb-4">
+    <label for="teacher" class="block text-sm font-medium text-gray-700"
+      >Select Teacher:</label
+    >
+    <select
+      id="teacher"
+      [(ngModel)]="selectedTeacherId"
+      class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+    >
+      <option *ngFor="let teacher of teachers" [value]="teacher.id">
+        {{ teacher.name }}
+      </option>
+    </select>
+  </div>
+
+  <!-- Course Selection Dropdown -->
+  <div class="mb-4">
+    <label for="course" class="block text-sm font-medium text-gray-700"
+      >Select Course:</label
+    >
+    <select
+      id="course"
+      [(ngModel)]="selectedCourseId"
+      class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+    >
+      <option *ngFor="let course of courses" [value]="course.id">
+        {{ course.name }}
+      </option>
+    </select>
+  </div>
+
+  <!-- Button to assign teacher to course -->
+  <button
+    (click)="assignTeacherToCourse()"
+    class="px-4 py-2 bg-blue-500 text-white rounded-md shadow-sm hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+  >
+    Assign Teacher to Course
+  </button>
+
+  <!-- Table to display assigned teacher-course mappings -->
+  <div class="mt-8">
+    <h2 class="text-lg font-semibold mb-2">Assigned Teacher-Course Mappings</h2>
+    <table class="w-full text-left text-gray-300">
+      <thead class="bg-gray-700">
+        <tr>
+          <th class="px-4 py-2">Teacher</th>
+          <th class="px-4 py-2">Course</th>
+          <th class="px-4 py-2">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="let mapping of teacherCourseMappings"
+          class="hover:bg-gray-700"
+        >
+          <td class="px-4 py-2">{{ getTeacherNameById(mapping.teacherId) }}</td>
+          <td class="px-4 py-2">{{ getCourseNameById(mapping.courseId) }}</td>
+          <td class="px-4 py-2">
+            <button
+              (click)="
+                deleteTeacherCourseMapping(mapping.teacherId, mapping.courseId)
+              "
+              class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md"
+            >
+              Delete
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

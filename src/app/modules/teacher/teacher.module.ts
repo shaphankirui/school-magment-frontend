@@ -6,21 +6,23 @@ import { ShowTeacherComponent } from './components/show-teacher/show-teacher.com
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { TeacherProfileComponent } from './components/teacher-profile/teacher-profile.component';
-
-
+import { RouterModule } from '@angular/router';
+import { AssignTeacherCoursesComponent } from './components/assign-teacher-couseres/assign-teacher-couseres.component';
 
 @NgModule({
   declarations: [
     CreateTeacherComponent,
     UpdateTeacherComponent,
     ShowTeacherComponent,
-    TeacherProfileComponent
+    TeacherProfileComponent,
+    AssignTeacherCoursesComponent,
   ],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
-  ]
+    RouterModule,
+    HttpClientModule,
+  ],
 })
-export class TeacherModule { }
+export class TeacherModule {}

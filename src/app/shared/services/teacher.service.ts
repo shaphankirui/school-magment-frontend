@@ -5,16 +5,12 @@ import { environment } from '../environments/environments';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class TeacherService {
+  constructor(private http: HttpClient) {}
 
-  constructor(
-    private http: HttpClient
-
-  ) { }
-
-  getAllTeacher():Observable <Teacher[]> {
+  getAllTeacher(): Observable<Teacher[]> {
     const url = `${environment.apiRootUrl}/teachers`;
     return this.http.get<Teacher[]>(url);
   }
@@ -23,10 +19,15 @@ export class TeacherService {
     return this.http.post<Teacher>(url, teacher);
   }
   getTeacherById(id: number): Observable<Teacher> {
-    const url = `${environment.apiRootUrl}/teachers/${id}`
+    const url = `${environment.apiRootUrl}/teachers/${id}`;
     return this.http.get<Teacher>(url);
   }
-  updateTeacher(id:number, data:any): Observable<any> {
+  getTeacherByToken(token: string): Observable<Teacher> {
+    const encodedToken = encodeURIComponent(token);
+    const url = `${environment.apiRootUrl}/teachers/profile/${encodedToken}`;
+    return this.http.get<Teacher>(url);
+  }
+  updateTeacher(id: number, data: any): Observable<any> {
     return this.http.put(`${environment.apiRootUrl}/teachers/${id}`, data);
   }
 }
