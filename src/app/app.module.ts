@@ -19,10 +19,12 @@ import { ExamsModule } from './modules/exams/exams.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { ResultsModule } from './modules/results/results.module';
 import { AuthLayoutComponent } from './layout/auth-layout/auth-layout.component';
+import { UserProfileComponent } from './shared/components/user-profile/user-profile.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    // UserProfileComponent,
     // MainLayoutComponent,
     // AuthLayoutComponent
   ],

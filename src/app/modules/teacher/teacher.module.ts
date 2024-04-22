@@ -5,6 +5,7 @@ import { UpdateTeacherComponent } from './components/update-teacher/update-teach
 import { ShowTeacherComponent } from './components/show-teacher/show-teacher.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { TeacherProfileComponent } from './components/teacher-profile/teacher-profile.component';
 
 
 
@@ -12,7 +13,8 @@ import { HttpClientModule } from '@angular/common/http';
   declarations: [
     CreateTeacherComponent,
     UpdateTeacherComponent,
-    ShowTeacherComponent
+    ShowTeacherComponent,
+    TeacherProfileComponent
   ],
   imports: [
     CommonModule,

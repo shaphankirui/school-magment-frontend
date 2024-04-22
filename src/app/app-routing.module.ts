@@ -16,6 +16,8 @@ import { AddResultsComponent } from './modules/results/components/add-results/ad
 import { ShowResultsComponent } from './modules/results/components/show-results/show-results.component';
 import { AuthLayoutComponent } from './layout/auth-layout/auth-layout.component';
 import { MainLayoutComponent } from './layout/main-layout/main-layout.component';
+import { UserProfileComponent } from './shared/components/user-profile/user-profile.component';
+import { TeacherProfileComponent } from './modules/teacher/components/teacher-profile/teacher-profile.component';
 
 const routes: Routes = [
   {
@@ -36,6 +38,7 @@ const routes: Routes = [
       { path: 'exams', component: ShowExamsComponent },
       { path: 'postResults', component: AddResultsComponent },
       { path: 'results', component: ShowResultsComponent },
+      { path: 'techers_profile', component: TeacherProfileComponent },
     ],
   },
 
