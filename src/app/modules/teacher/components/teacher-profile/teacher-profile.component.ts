@@ -50,12 +50,12 @@ export class TeacherProfileComponent implements OnInit {
       this.teacher = teacher;
     });
   }
-  getTeacherCourses() {
-    this.coursesService.getAllCourse().subscribe((courses) => {
-      this.courses = courses.filter(
-        (course) => course.teacherId === this.teacher.id
-      );
-      console.log('courses ', this.courses);
-    });
-  }
+  // getTeacherCourses() {
+  //   this.coursesService.getAllCourse().subscribe((courses) => {
+  //     this.courses = courses.filter(
+  //       (course) => course.teacherId === this.teacher.id
+  //     );
+  //     console.log('courses ', this.courses);
+  //   });
+  // }
 }

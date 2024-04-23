@@ -8,7 +8,7 @@ import { TeacherService } from '../../../../shared/services/teacher.service';
 @Component({
   selector: 'app-assign-teacher-couseres',
   templateUrl: './assign-teacher-couseres.component.html',
-  styleUrl: './assign-teacher-couseres.component.scss'
+  styleUrl: './assign-teacher-couseres.component.scss',
 })
 export class AssignTeacherCoursesComponent implements OnInit {
   teachers: Teacher[] = [];
@@ -61,8 +61,8 @@ export class AssignTeacherCoursesComponent implements OnInit {
     if (this.selectedTeacherId && this.selectedCourseId) {
       this.teacherCourseService
         .createTeacherCourse({
-          teacherId: this.selectedTeacherId,
-          courseId: this.selectedCourseId,
+          teacherId: +this.selectedTeacherId,
+          courseId: +this.selectedCourseId,
         })
         .subscribe(() => {
           this.fetchTeacherCourseMappings();
@@ -78,4 +78,3 @@ export class AssignTeacherCoursesComponent implements OnInit {
       });
   }
 }
-
