@@ -6,8 +6,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 @Component({
   selector: 'app-create-teacher',
   templateUrl: './create-teacher.component.html',
-  styleUrls: ['./create-teacher.component.scss']
-  
+  styleUrls: ['./create-teacher.component.scss'],
 })
 export class CreateTeacherComponent {
   @Input() modalId: string = '';
@@ -21,18 +20,25 @@ export class CreateTeacherComponent {
     private toast: HotToastService,
     private formBuilder: FormBuilder
   ) {
-    this.teacherForm ! = this.formBuilder.group({
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      otherName: [''],
-      gender: [null, Validators.required],
-      phone: ['', Validators.required],
-      password: ['', Validators.required],
-      passwordConfirm: ['', Validators.required]
-    }, {
-      validator: this.passwordMatchValidator
-    });
+    this.teacherForm! = this.formBuilder.group(
+      {
+        firstName: ['', Validators.required],
+        lastName: ['', Validators.required],
+        email: ['', [Validators.required, Validators.email]],
+        otherName: [''],
+        gender: [null, Validators.required],
+        phone: ['', Validators.required],
+        accountNumber: ['', Validators.required],
+        bankName: ['', Validators.required],
+        is_bom: [false, Validators.required],
+        salaryAmount: [''],
+        password: ['', Validators.required],
+        passwordConfirm: ['', Validators.required],
+      },
+      {
+        validator: this.passwordMatchValidator,
+      }
+    );
   }
 
   passwordMatchValidator(formGroup: FormGroup) {
@@ -53,23 +59,28 @@ export class CreateTeacherComponent {
   onSubmit() {
     if (this.teacherForm.invalid) {
       this.toast.error('Please fill in all fields');
-      console.log("Form is invalid", this.teacherForm.value);
+      console.log('Form is invalid', this.teacherForm.value);
       return;
     }
 
-    if (this.teacherForm.get('password')!.value !== this.teacherForm.get('passwordConfirm')!.value) {
+    if (
+      this.teacherForm.get('password')!.value !==
+      this.teacherForm.get('passwordConfirm')!.value
+    ) {
       // Passwords do not match
       this.toast.error('Passwords do not match');
       return;
     }
 
-    console.log("Class to be created", this.teacherForm.value);
-    this.teacherService.createTeacher(this.teacherForm.value).subscribe((data: any) => {
-      console.log(data);
-      this.toast.success('Class created successfully');
-      this.closeModal();
-      this.clearForm();
-    });
+    console.log('Class to be created', this.teacherForm.value);
+    this.teacherService
+      .createTeacher(this.teacherForm.value)
+      .subscribe((data: any) => {
+        console.log(data);
+        this.toast.success('Class created successfully');
+        this.closeModal();
+        this.clearForm();
+      });
   }
 
   clearForm() {
@@ -80,7 +91,7 @@ export class CreateTeacherComponent {
       otherName: '',
       gender: null,
       password: '',
-      passwordConfirm: ''
+      passwordConfirm: '',
     });
   }
 }

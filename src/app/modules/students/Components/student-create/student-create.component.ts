@@ -13,7 +13,7 @@ import { StudentService } from '../../../../shared/services/student.service';
   styleUrls: ['./student-create.component.scss'],
 })
 export class StudentCreateComponent implements OnInit {
-  studentForm!: FormGroup; 
+  studentForm!: FormGroup;
   classes: Class[] = [];
   parents: Parent[] = [];
 
@@ -24,9 +24,9 @@ export class StudentCreateComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private classService: ClassService,
-    private parentService:ParentService,
-    private studenService:StudentService
-    ) {
+    private parentService: ParentService,
+    private studenService: StudentService
+  ) {
     this.createForm();
   }
   ngOnInit() {
@@ -42,21 +42,22 @@ export class StudentCreateComponent implements OnInit {
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       otherName: [''],
+      emergencyContactNumber: [''],
       gender: ['', Validators.required],
       classId: [null, Validators.required], // Set default value to null
       parentId: [null, Validators.required], // Set default value to null
     });
   }
-  
+
   getAllClasses() {
-    this.classService.getAllClasses().subscribe((data:Class[])=>{
-      this.classes=data;
-      console.log( 'All classes',this.classes);
+    this.classService.getAllClasses().subscribe((data: Class[]) => {
+      this.classes = data;
+      console.log('All classes', this.classes);
     });
   }
-  getAllParents(){
-    this.parentService.getAllparents().subscribe((data:Parent[])=>{
-      this.parents=data;
+  getAllParents() {
+    this.parentService.getAllparents().subscribe((data: Parent[]) => {
+      this.parents = data;
       console.log('All parents', this.parents);
     });
   }
@@ -66,19 +67,18 @@ export class StudentCreateComponent implements OnInit {
       console.log('Invalid form');
       return;
     }
-  
+
     // Convert classId and parentId to numbers
     const formData = {
       ...this.studentForm.value,
       classId: Number(this.studentForm.value.classId),
-      parentId: Number(this.studentForm.value.parentId)
+      parentId: Number(this.studentForm.value.parentId),
     };
-  
+
     this.studenService.createStudent(formData).subscribe((data: Student) => {
       console.log('Student created', data);
       this.toggleModal.emit();
       this.studentForm.reset();
     });
   }
-  
 }

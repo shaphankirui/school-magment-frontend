@@ -12,6 +12,7 @@ import { Student } from '../../../../shared/interfaces/student.interface';
 export class ShowFinanceComponent {
   finances: Finance[] = [];
   students: Student[] = [];
+  isLoading: boolean = true;
   constructor(private financeService: FinanceService,private studentService: StudentService) { }
 
   ngOnInit() {
@@ -50,6 +51,7 @@ export class ShowFinanceComponent {
   getAllStudents() {
     this.studentService.getAllStudents().subscribe((data: Student[]) => {
       this.students = data;
+      this.isLoading=false
       console.log('All students', this.students);
     });
   }

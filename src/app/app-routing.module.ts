@@ -19,6 +19,7 @@ import { MainLayoutComponent } from './layout/main-layout/main-layout.component'
 import { UserProfileComponent } from './shared/components/user-profile/user-profile.component';
 import { TeacherProfileComponent } from './modules/teacher/components/teacher-profile/teacher-profile.component';
 import { AssignTeacherCoursesComponent } from './modules/teacher/components/assign-teacher-couseres/assign-teacher-couseres.component';
+import { ShowStudentsFeeComponent } from './modules/finance/components/show-students-fee/show-students-fee.component';
 
 const routes: Routes = [
   {
@@ -41,6 +42,7 @@ const routes: Routes = [
       { path: 'results', component: ShowResultsComponent },
       { path: 'techers_profile', component: TeacherProfileComponent },
       { path: 'assign_Courses', component: AssignTeacherCoursesComponent },
+      { path: 'fees', component: ShowStudentsFeeComponent },
     ],
   },
 

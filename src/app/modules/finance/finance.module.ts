@@ -5,13 +5,22 @@ import { CreateFinanceComponent } from './components/create-finance/create-finan
 import { UpdateFinanceComponent } from './components/update-finance/update-finance.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ShowStudentsFeeComponent } from './components/show-students-fee/show-students-fee.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
     ShowFinanceComponent,
     CreateFinanceComponent,
     UpdateFinanceComponent,
+    ShowStudentsFeeComponent,
   ],
-  imports: [CommonModule, HttpClientModule,FormsModule,ReactiveFormsModule],
+  imports: [
+    CommonModule,
+    HttpClientModule,
+    RouterModule,
+    FormsModule,
+    ReactiveFormsModule,
+  ],
 })
 export class FinanceModule {}
