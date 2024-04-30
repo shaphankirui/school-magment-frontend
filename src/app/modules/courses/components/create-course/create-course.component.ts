@@ -45,6 +45,7 @@ export class CreateCourseComponent {
       .createCourse(this.courseDetails)
       .subscribe((data: any) => {
         console.log(data);
+        this.createCourseGradingSystem(data.id, this.gradeRanges);
         this.toast.success('Class created successfully');
         this.closeModal();
         this.clearForm();
@@ -54,5 +55,14 @@ export class CreateCourseComponent {
     this.courseDetails = {
       name: '',
     };
+  }
+  createCourseGradingSystem(id: number, gradeData: any) {
+    console.log('id', id);
+    this.courseService
+      .createCourseGradingSytem(id, gradeData)
+      .subscribe((data: any) => {
+        console.log(data);
+        this.toast.success('Grading system created successfully');
+      });
   }
 }

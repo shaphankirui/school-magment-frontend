@@ -24,6 +24,10 @@ export class CourseService {
   const url = `${environment.apiRootUrl}/courses`;
   return this.http.post<Course>(url, courseData);
  }
+ createCourseGradingSytem(id:number,gradeData: Course):Observable<Course> {
+  const url = `${environment.apiRootUrl}/courses/${id}/grading-system`;;
+  return this.http.post<Course>(url, gradeData);
+ }
  getCourseById(id: number): Observable<Course> {
   const url = `${environment.apiRootUrl}/courses/${id}`
   return this.http.get<Course>(url);
