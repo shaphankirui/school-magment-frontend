@@ -47,6 +47,7 @@ export class ShowResultsComponent implements OnInit {
     this.getAllStudents();
     this.getAllClasses();
     this.getTeacherByToken();
+    this.getAllExams();
   }
   getTeacherByToken() {
     const token = localStorage.getItem('token');
@@ -141,8 +142,17 @@ export class ShowResultsComponent implements OnInit {
       typeof classId === 'string' ? parseInt(classId) : classId;
 
     this.examService.getAllExams().subscribe((data: Exams[]) => {
-      this.exams = data.filter((exam: Exams) => exam.classId === classIdNumber);
+      // this.exams = data.filter((exam: Exams) => exam.classId === classIdNumber);
+      this.exams = data;
       this.examResults = [];
+    });
+  }
+  getAllExams() {
+    this.examService.getAllExams().subscribe((data: Exams[]) => {
+      // this.exams = data.filter((exam: Exams) => exam.classId === classIdNumber);
+      this.exams = data;
+      console.log('all exams', this.exams);
+      // this.examResults = [];
     });
   }
 }
