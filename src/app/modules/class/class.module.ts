@@ -5,6 +5,9 @@ import { CreateClassComponent } from './components/create-class/create-class.com
 import { UpdateClassComponent } from './components/update-class/update-class.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { CreateSubClassComponent } from './components/create-sub-class/create-sub-class.component';
+import { ShowSubClassComponent } from './components/show-sub-class/show-sub-class.component';
+import { UpdateSubClassComponent } from './components/update-sub-class/update-sub-class.component';
 
 
 
@@ -12,7 +15,10 @@ import { HttpClientModule } from '@angular/common/http';
   declarations: [
     ShowClassComponent,
     CreateClassComponent,
-    UpdateClassComponent
+    UpdateClassComponent,
+    CreateSubClassComponent,
+    ShowSubClassComponent,
+    UpdateSubClassComponent
   ],
   imports: [
     CommonModule,

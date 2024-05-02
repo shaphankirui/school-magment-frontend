@@ -20,6 +20,7 @@ import { UserProfileComponent } from './shared/components/user-profile/user-prof
 import { TeacherProfileComponent } from './modules/teacher/components/teacher-profile/teacher-profile.component';
 import { AssignTeacherCoursesComponent } from './modules/teacher/components/assign-teacher-couseres/assign-teacher-couseres.component';
 import { ShowStudentsFeeComponent } from './modules/finance/components/show-students-fee/show-students-fee.component';
+import { ShowSubClassComponent } from './modules/class/components/show-sub-class/show-sub-class.component';
 
 const routes: Routes = [
   {
@@ -32,6 +33,7 @@ const routes: Routes = [
       { path: 'student:id', component: StudentDetailsComponent },
       { path: 'dashboard', component: DashboardMainComponent },
       { path: 'class', component: ShowClassComponent },
+      { path: 'sub_class', component: ShowSubClassComponent },
       { path: 'courses', component: ShowCoursesComponent },
       { path: 'finance', component: ShowFinanceComponent },
       { path: 'managment', component: ShowManagmentComponent },

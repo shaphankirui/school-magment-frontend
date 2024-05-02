@@ -104,15 +104,15 @@ export class TeacherProfileComponent implements OnInit {
     );
   }
   getClassTeacherClass(firstName: string, lastName: string) {
-    const teacherFullName = `${firstName} ${lastName}`;
-    console.log('Teacher full name:', teacherFullName);
-    console.log('Checking if classes are loaded:', this.classes);
-    this.classTeacherClass =
-      this.classes.find(
-        (classItem) =>
-          classItem.classTeacher.toLowerCase().trim() ===
-          teacherFullName.toLowerCase().trim()
-      ) || [];
-    console.log("Class teacher's class:", this.classTeacherClass);
+    // const teacherFullName = `${firstName} ${lastName}`;
+    // console.log('Teacher full name:', teacherFullName);
+    // console.log('Checking if classes are loaded:', this.classes);
+    // this.classTeacherClass =
+    //   this.classes.find(
+    //     (classItem) =>
+    //       classItem.classTeacher ===
+    //       teacherFullName.toLowerCase().trim()
+    //   ) || [];
+    // console.log("Class teacher's class:", this.classTeacherClass);
   }
 }

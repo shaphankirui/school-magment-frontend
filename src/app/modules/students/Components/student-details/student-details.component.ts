@@ -1,9 +1,17 @@
-import { Component, EventEmitter, Input, OnInit, Output, OnChanges, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  OnChanges,
+  SimpleChanges,
+} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ClassService } from '../../../../shared/services/class.service';
 import { ParentService } from '../../../../shared/services/parent.service';
 import { StudentService } from '../../../../shared/services/student.service';
-import { Class } from '../../../../shared/interfaces/class.interface';
+import { Class, SubClass } from '../../../../shared/interfaces/class.interface';
 import { Parent } from '../../../../shared/interfaces/parent.interface';
 import { Student } from '../../../../shared/interfaces/student.interface';
 import { HotToastService } from '@ngneat/hot-toast';
@@ -11,17 +19,17 @@ import { HotToastService } from '@ngneat/hot-toast';
 @Component({
   selector: 'app-student-details',
   templateUrl: './student-details.component.html',
-  styleUrls: ['./student-details.component.scss']
+  styleUrls: ['./student-details.component.scss'],
 })
 export class StudentDetailsComponent implements OnInit, OnChanges {
-  
   @Input() modalId: string = '';
   @Input() studentId: number | null = null;
   @Input() isModalVisible: boolean = false;
   @Output() toggleModal = new EventEmitter<void>();
 
-  studentForm!: FormGroup; 
+  studentForm!: FormGroup;
   classes: Class[] = [];
+  subClasses: SubClass[] = [];
   parents: Parent[] = [];
 
   constructor(
@@ -29,7 +37,7 @@ export class StudentDetailsComponent implements OnInit, OnChanges {
     private classService: ClassService,
     private parentService: ParentService,
     private studentService: StudentService,
-    private toast:HotToastService
+    private toast: HotToastService
   ) {
     this.createForm();
   }
@@ -37,6 +45,7 @@ export class StudentDetailsComponent implements OnInit, OnChanges {
   ngOnInit() {
     this.getAllClasses();
     this.getAllParents();
+    this.getAllSubClasses();
     // this.getStudentById(this.studentId!);
   }
 
@@ -53,6 +62,8 @@ export class StudentDetailsComponent implements OnInit, OnChanges {
       otherName: [''],
       gender: ['', Validators.required],
       classId: [null, Validators.required], // Set default value to null
+      subClassId: [null, Validators.required], // Set default value to null
+      emergencyContactNumber: ['', Validators.required], // Set default value to null
       parentId: [null, Validators.required], // Set default value to null
     });
   }
@@ -61,6 +72,12 @@ export class StudentDetailsComponent implements OnInit, OnChanges {
     this.classService.getAllClasses().subscribe((data: Class[]) => {
       this.classes = data;
       console.log('All classes', this.classes);
+    });
+  }
+  getAllSubClasses() {
+    this.classService.getAllSubClasses().subscribe((data: SubClass[]) => {
+      this.subClasses = data;
+      // console.log('All classes', this.classes);
     });
   }
 
@@ -72,7 +89,6 @@ export class StudentDetailsComponent implements OnInit, OnChanges {
   }
 
   getStudentById(id: number) {
-
     // console.log("Getting student by id", id);
     this.studentService.getStudentById(id).subscribe((data: Student) => {
       this.studentForm.setValue({
@@ -81,7 +97,9 @@ export class StudentDetailsComponent implements OnInit, OnChanges {
         otherName: data.otherName,
         gender: data.gender,
         classId: data.classId,
-        parentId: data.parentId
+        subClassId: data.subClassId,
+        emergencyContactNumber: data.emergencyContactNumber,
+        parentId: data.parentId,
       });
       console.log('Student details', data);
     });
@@ -93,22 +111,25 @@ export class StudentDetailsComponent implements OnInit, OnChanges {
       return;
     }
     const data = {
-      firstName:this.studentForm.get('firstName')?.value,
-      lastName:this.studentForm.get('lastName')?.value,
-      otherName:this.studentForm.get('otherName')?.value,
-      gender:this.studentForm.get('gender')?.value,
-      classId:this.studentForm.get('classId')?.value,
-      parentId:this.studentForm.get('parentId')?.value
-    }
+      firstName: this.studentForm.get('firstName')?.value,
+      lastName: this.studentForm.get('lastName')?.value,
+      otherName: this.studentForm.get('otherName')?.value,
+      gender: this.studentForm.get('gender')?.value,
+      classId: this.studentForm.get('classId')?.value,
+      subClassId: this.studentForm.get('subClassId')?.value,
+      emergencyContactNumber: this.studentForm.get('emergencyContactNumber ')
+        ?.value,
+      parentId: this.studentForm.get('parentId')?.value,
+    };
     console.log('Submitting student form: ', data);
-    this.studentService.updateStudent(this.studentId!, this.studentForm.value).subscribe((data: any) => {
-      console.log('Student updated', data);
-      this.toast.success('Student updated successfully');
-      this.closeModal();
-    });
-
+    this.studentService
+      .updateStudent(this.studentId!, this.studentForm.value)
+      .subscribe((data: any) => {
+        console.log('Student updated', data);
+        this.toast.success('Student updated successfully');
+        this.closeModal();
+      });
   }
-  
 
   closeModal() {
     this.toggleModal.emit();

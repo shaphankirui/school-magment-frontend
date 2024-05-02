@@ -1,4 +1,6 @@
 export interface Student {
+  emergencyContactNumber: any;
+  subClassId: number;
   feeBalance: any;
   admisionNumber: any;
   score: any;

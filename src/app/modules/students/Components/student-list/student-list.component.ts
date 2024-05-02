@@ -6,7 +6,7 @@ import { CourseService } from '../../../../shared/services/course.service';
 import { ParentService } from '../../../../shared/services/parent.service';
 import { Parent } from '../../../../shared/interfaces/parent.interface';
 import { Course } from '../../../../shared/interfaces/courses.interface';
-import { Class } from '../../../../shared/interfaces/class.interface';
+import { Class, SubClass } from '../../../../shared/interfaces/class.interface';
 
 @Component({
   selector: 'app-student-list',
@@ -22,6 +22,7 @@ export class StudentListComponent implements OnInit{
   @Output() editStudent = new EventEmitter<number>(); // Event emitter for edit
 
   classes:Class[] = [];
+  subClasses:SubClass[] = [];
   courses:Course[] = [];
   parents:Parent[] = [];
   AccdemicTerms:any[] = [];
@@ -59,9 +60,9 @@ export class StudentListComponent implements OnInit{
       this.classes = classes;
     });
 
-    // this.courseService.getAllCourse().subscribe((courses: Course[]) => {
-    //   this.courses = courses;
-    // });
+    this.classService.getAllSubClasses().subscribe((classes: SubClass[]) => {
+      this.subClasses = classes;
+    });
 
     this.parentService.getAllparents().subscribe((teachers: Parent[]) => {
       this.parents = teachers;
@@ -83,6 +84,14 @@ export class StudentListComponent implements OnInit{
 
   getClassNameById(classId: number): string {
     const classItem = this.classes.find((classItem: Class) => classItem.id === classId);
+    if (classItem) {
+        return classItem.name;
+    } else {
+        return 'Unknown Class'; // Or any default value you prefer
+    }
+  }
+  getSubClassNameById(classId: number): string {
+    const classItem = this.subClasses.find((classItem: SubClass) => classItem.id === classId);
     if (classItem) {
         return classItem.name;
     } else {

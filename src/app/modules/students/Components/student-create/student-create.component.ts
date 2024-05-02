@@ -4,7 +4,7 @@ import { ClassService } from '../../../../shared/services/class.service';
 import { Student } from '../../../../shared/interfaces/student.interface';
 import { ParentService } from '../../../../shared/services/parent.service';
 import { Parent } from '../../../../shared/interfaces/parent.interface';
-import { Class } from '../../../../shared/interfaces/class.interface';
+import { Class, SubClass } from '../../../../shared/interfaces/class.interface';
 import { StudentService } from '../../../../shared/services/student.service';
 
 @Component({
@@ -15,6 +15,7 @@ import { StudentService } from '../../../../shared/services/student.service';
 export class StudentCreateComponent implements OnInit {
   studentForm!: FormGroup;
   classes: Class[] = [];
+  subClasses: SubClass[] = [];
   parents: Parent[] = [];
 
   @Input() modalId: string = '';
@@ -32,6 +33,7 @@ export class StudentCreateComponent implements OnInit {
   ngOnInit() {
     this.getAllClasses();
     this.getAllParents();
+    this.getAllSubClasses();
   }
   closeModal() {
     this.toggleModal.emit();
@@ -45,6 +47,7 @@ export class StudentCreateComponent implements OnInit {
       emergencyContactNumber: [''],
       gender: ['', Validators.required],
       classId: [null, Validators.required], // Set default value to null
+      subClassId: [null, Validators.required], // Set default value to null
       parentId: [null, Validators.required], // Set default value to null
     });
   }
@@ -53,6 +56,12 @@ export class StudentCreateComponent implements OnInit {
     this.classService.getAllClasses().subscribe((data: Class[]) => {
       this.classes = data;
       console.log('All classes', this.classes);
+    });
+  }
+  getAllSubClasses() {
+    this.classService.getAllSubClasses().subscribe((data: SubClass[]) => {
+      this.subClasses = data;
+      // console.log('All classes', this.classes);
     });
   }
   getAllParents() {
@@ -72,6 +81,7 @@ export class StudentCreateComponent implements OnInit {
     const formData = {
       ...this.studentForm.value,
       classId: Number(this.studentForm.value.classId),
+      subClassId: Number(this.studentForm.value.subClassId),
       parentId: Number(this.studentForm.value.parentId),
     };
 

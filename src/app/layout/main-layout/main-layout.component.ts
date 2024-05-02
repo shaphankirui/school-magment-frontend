@@ -13,6 +13,16 @@ export class MainLayoutComponent {
   showSidebar = true;
   activeNavLinks: { [key: string]: boolean } = {};
   isMenuOpen: boolean = true;
+  // isMenuOpen = false;
+  isClassesMenuOpen = false;
+
+  toggleMenu(): void {
+    this.isMenuOpen = !this.isMenuOpen;
+  }
+
+  toggleClassesMenu(): void {
+    this.isClassesMenuOpen = !this.isClassesMenuOpen;
+  }
 
   @HostListener('window:resize', ['$event'])
   onResize(event: Event): void {
@@ -26,7 +36,7 @@ export class MainLayoutComponent {
     }
   }
 
-  toggleMenu() {
+  toggleMenuu() {
     this.isMenuOpen = !this.isMenuOpen;
   }
 
